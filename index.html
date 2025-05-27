@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamento</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Página Inicial -->
+    <section id="pagina-inicial">
+      <h1>Agendamento Vikings</h1>
+      <button onclick="mostrarPagina('horarios')">Ver Horários</button>
+      <button onclick="mostrarPagina('minhas-reservas')">Minhas Reservas</button>
+      <div id="admin-button" onclick="mostrarLoginAdmin()">A</div>
+    </section>
+
+    <!-- Modal Login Admin -->
+    <div id="admin-login" class="modal hidden">
+      <h2>Login Administrador</h2>
+      <input type="text" id="admin-user" placeholder="Usuário" value="admin">
+      <input type="password" id="admin-pass" placeholder="Senha" value="admin">
+      <button onclick="loginAdmin()">Entrar</button>
+      <button onclick="fecharModal()">Cancelar</button>
+    </div>
+
+    <!-- Modal Reserva -->
+    <div id="reserva-modal" class="modal hidden">
+      <h2 id="reserva-modal-titulo">Reservar Horário</h2>
+      <input type="text" id="cliente-nome" placeholder="Seu Nome" required>
+      <input type="tel" id="cliente-telefone" placeholder="Seu Telefone" required>
+      <select id="forma-pagamento" required>
+        <option value="">Forma de Pagamento</option>
+        <option value="PIX">PIX</option>
+        <option value="Cartão">Cartão</option>
+        <option value="Dinheiro">Dinheiro</option>
+      </select>
+      <button onclick="confirmarReserva()">Confirmar Reserva</button>
+      <button onclick="fecharModal()">Cancelar</button>
+    </div>
+
+    <!-- Modal Info Reserva (Admin) -->
+    <div id="info-reserva-modal" class="modal hidden">
+      <h2>Informações da Reserva</h2>
+      <div class="info-reserva">
+        <p><strong>Data:</strong> <span id="info-data"></span></p>
+        <p><strong>Horário:</strong> <span id="info-horario"></span></p>
+        <p><strong>Nome:</strong> <span id="info-nome"></span></p>
+        <p><strong>Telefone:</strong> <span id="info-telefone"></span></p>
+        <p><strong>Pagamento:</strong> <span id="info-pagamento"></span></p>
+      </div>
+      <button onclick="cancelarReservaAdmin()" style="background-color: #d32f2f;">Excluir Reserva</button>
+      <button onclick="fecharModal()">Fechar</button>
+    </div>
+
+    <!-- Modal Confirmação -->
+    <div id="confirmacao-modal" class="modal hidden">
+      <h2 id="confirmacao-titulo">Confirmar Ação</h2>
+      <p id="confirmacao-mensagem"></p>
+      <button onclick="confirmarAcao()" id="confirmacao-botao">Confirmar</button>
+      <button onclick="fecharModal()">Cancelar</button>
+    </div>
+
+    <!-- Modal Mensagem -->
+    <div id="mensagem-modal" class="modal hidden">
+      <h2 id="mensagem-titulo">Mensagem</h2>
+      <p id="mensagem-conteudo"></p>
+      <button onclick="fecharModal()">Fechar</button>
+    </div>
+
+    <!-- Página: Ver Horários -->
+    <section id="pagina-horarios" class="hidden">
+      <h1>Horários Disponíveis</h1>
+      <div class="calendar">
+        <input type="text" id="calendario-input" placeholder="Selecione uma data">
+      </div>
+      <div id="horarios" class="horarios-container"></div>
+      <button onclick="mostrarPagina('inicial')">Voltar</button>
+    </section>
+
+    <!-- Página: Minhas Reservas -->
+    <section id="pagina-minhas-reservas" class="hidden">
+      <h1>Minhas Reservas</h1>
+      <div id="lista-reservas"></div>
+      <button onclick="mostrarPagina('inicial')">Voltar</button>
+    </section>
+
+    <!-- Página: Admin Visualização -->
+    <section id="pagina-admin" class="hidden">
+      <h1>Horários do Dia</h1>
+      <div class="calendar">
+        <input type="text" id="calendario-admin-input" placeholder="Selecione uma data">
+      </div>
+      <div id="horarios-admin" class="horarios-container"></div>
+      <button onclick="mostrarPagina('admin-criar')">Criar Horários</button>
+      <button onclick="mostrarPagina('inicial')">Sair</button>
+    </section>
+
+    <!-- Página: Admin Criar Horários -->
+    <section id="pagina-admin-criar" class="hidden">
+      <h1>Criar Horários</h1>
+      <div class="calendar">
+        <input type="text" id="data-criacao-input" placeholder="Selecione uma data">
+      </div>
+      <div id="botoes-horarios" class="horarios-container"></div>
+      <div style="display: flex; gap: 0.5rem;">
+        <button onclick="marcarTodosHorarios()" style="flex: 1;">Marcar Tudo</button>
+        <button onclick="preencherSemana()" style="flex: 1;">Preencher Semana</button>
+      </div>
+      <button onclick="salvarHorarios()" class="horario-disponivel">Salvar Horários</button>
+      <button onclick="limparDia()" style="background-color: #d32f2f;">Limpar Todos Horários</button>
+      <button onclick="mostrarPagina('admin')">Voltar</button>
+    </section>
+  </div>
+
+  <!-- Bibliotecas externas -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+  
+  <!-- Script principal -->
+  <script src="script.js"></script>
+</body>
+</html>
