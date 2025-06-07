@@ -340,7 +340,7 @@ async function confirmarReserva() {
     )}\nHorário: ${formatTimeDisplay(
       selectedTime
     )}\nCliente: ${nome}\nTelefone: ${telefone}\nPagamento: ${pagamento}`;
-    const urlWhatsApp = `https://wa.me/5527997563197?text=${encodeURIComponent(
+    const urlWhatsApp = `https://wa.me/5527988866867?text=${encodeURIComponent(
       mensagemWhatsApp
     )}`;
 
