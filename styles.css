@@ -1,176 +1,275 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+:root {
+  --bg-color: #121212;
+  --container-color: #1e1e1e;
+  --primary-color: #1b5e20;
+  --primary-hover: #2e7d32;
+  --danger-color: #c62828;
+  --danger-hover: #d32f2f;
+  --text-color: #ffffff;
+  --text-secondary: #b0b0b0;
+  --input-bg: #2c2c2c;
+  --input-border: #444444;
+  --button-bg: #323232;
+  --button-hover: #444444;
+  --admin-bg: #000e35; 
+  --admin-container: #1b263b;
+}
 
-* {
-  box-sizing: border-box;
+* { 
+  box-sizing: border-box; 
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #121212;
-  color: #f5f5f5;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  line-height: 1.6;
 }
 
 .container {
   width: 100%;
   max-width: 420px;
-  padding: 2rem 1.25rem;
-  background-color: #1a1a1a;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  padding: 1.75rem;
+  background-color: var(--container-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  margin: 1rem;
+  transition: all 0.3s ease;
 }
 
-/* Textos */
-h1, h2 {
+/* Estilo para páginas administrativas */
+body.admin-mode {
+  background-color: var(--admin-bg); 
+}
+
+body.admin-mode .container {
+  background-color: var(--admin-container);
+  box-shadow: 0 4px 20px rgba(13, 27, 42, 0.5);
+}
+
+h1 {
+  font-size: 1.75rem;
   font-weight: 600;
-  margin-bottom: 1.25rem;
-  color: #ffffff;
-  font-size: 1.5rem;
+  margin-bottom: 1.75rem;
+  color: var(--text-color);
   text-align: center;
+  position: relative;
+  padding-bottom: 0.75rem;
 }
 
-/* Botões padrão */
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+body.admin-mode h1::after {
+  background-color: #3a86ff;
+}
+
 button {
   width: 100%;
   padding: 0.85rem;
-  margin: 0.4rem 0;
+  margin: 0.5rem 0;
   font-size: 1rem;
+  font-weight: 500;
   border: none;
-  border-radius: 12px;
-  background-color: #2a2a2a;
-  color: #fff;
+  border-radius: 8px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-button:hover {
-  background-color: #3b3b3b;
+button:hover { 
+  background-color: var(--button-hover); 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 button:active {
-  transform: scale(0.97);
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 button.disabled {
-  background-color: #555;
+  background-color: #555555;
   cursor: not-allowed;
+  opacity: 0.7;
 }
 
-/* Botões especiais */
 button.horario-disponivel {
-  background-color: #2e7d32;
+  background-color: var(--primary-color);
+  color: var(--text-color);
 }
 
 button.horario-disponivel:hover {
-  background-color: #388e3c;
+  background-color: var(--primary-hover);
 }
 
 button.horario-reservado {
-  background-color: #c62828;
+  background-color: var(--danger-color);
+  color: var(--text-color);
 }
 
 button.horario-reservado:hover {
-  background-color: #d32f2f;
+  background-color: var(--danger-hover);
 }
 
-/* Inputs */
 input, select {
   width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border-radius: 10px;
-  border: none;
-  background-color: #2a2a2a;
-  color: #fff;
+  padding: 0.85rem;
+  margin-bottom: 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
   font-size: 1rem;
-  transition: border 0.2s ease, background-color 0.2s ease;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: border-color 0.3s ease;
 }
 
 input:focus, select:focus {
   outline: none;
-  border: 1px solid #4caf50;
-  background-color: #333;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(27, 94, 32, 0.3);
 }
 
-/* Modal */
+body.admin-mode input:focus,
+body.admin-mode select:focus {
+  border-color: #3a86ff;
+  box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.3);
+}
+
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 92%;
-  max-width: 360px;
-  background-color: #1e1e1e;
+  width: 90%;
+  max-width: 380px;
+  background-color: var(--container-color);
   padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-  z-index: 100;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  animation: modalFadeIn 0.3s ease-out forwards;
 }
 
-.hidden {
-  display: none;
+body.admin-mode .modal {
+  background-color: var(--admin-container);
+}
+
+.hidden { 
+  display: none; 
 }
 
 #admin-button {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
   width: 48px;
   height: 48px;
-  background-color: #2a2a2a;
-  color: white;
+  background: var(--button-bg);
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  font-weight: 600;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   cursor: pointer;
-  font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 100;
+  font-weight: bold;
+}
+
+#admin-button:hover {
+  transform: scale(1.1);
+  background-color: #3a86ff;
 }
 
 section {
-  padding: 0.5rem;
+  padding: 0.75rem;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.horario-btn {
+  margin: 0.3rem;
+  width: calc(50% - 0.6rem);
+  display: inline-block;
+  font-size: 0.95rem;
+}
+
+.reserva-item {
+  background-color: var(--input-bg);
+  padding: 1rem;
+  margin: 0.75rem 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-left: 4px solid var(--primary-color);
+}
+
+.reserva-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+body.admin-mode .reserva-item {
+  border-left-color: #3a86ff;
 }
 
 .calendar {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .horarios-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
+  justify-content: space-between;
+  margin: 0 -0.3rem;
 }
 
-.horario-btn {
-  flex: 1 1 45%;
-  padding: 0.6rem;
-  border-radius: 10px;
-  font-size: 0.95rem;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  backdrop-filter: blur(3px);
 }
 
-.reserva-item {
-  background-color: #252525;
+.info-reserva {
+  margin-bottom: 1.25rem;
+  background-color: var(--input-bg);
   padding: 1rem;
-  margin: 0.5rem 0;
-  border-radius: 10px;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-}
-
-.reserva-item:hover {
-  background-color: #333;
+  border-radius: 8px;
 }
 
 .info-reserva p {
-  margin: 0.4rem 0;
+  margin: 0.75rem 0;
+  color: var(--text-secondary);
+}
+
+.info-reserva span {
+  color: var(--text-color);
+  font-weight: 500;
 }
 
 .mensagem-flutuante {
@@ -178,147 +277,70 @@ section {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #1b5e20;
+  background-color: var(--primary-color);
   color: white;
-  padding: 0.75rem 1.25rem;
+  padding: 14px 28px;
   border-radius: 8px;
-  z-index: 1000;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  z-index: 1100;
   animation: fadeInOut 3s ease-in-out;
+  font-weight: 500;
 }
 
+/* Animações */
 @keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(-10px); }
-  10% { opacity: 1; transform: translateY(0); }
-  90% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-10px); }
+  0% { opacity: 0; top: 0; }
+  10% { opacity: 1; top: 20px; }
+  90% { opacity: 1; top: 20px; }
+  100% { opacity: 0; top: 0; }
 }
 
-/* ===== ADMIN MODE CORRIGIDO ===== */
-.modo-admin {
-  background-color: #0a1929;
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-.modo-admin .container {
-  background-color: #132f4c;
-  border: 1px solid #1e4976;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
-.modo-admin h1, 
-.modo-admin h2 {
-  color: #66b2ff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.modo-admin button {
-  background-color: #1e4976;
-  color: #e6f3ff;
-  border: 1px solid #2a5a8f;
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translate(-50%, -45%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
-.modo-admin button:hover {
-  background-color: #2a5a8f;
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
 }
 
-/* Corrigido: Mantém cores de ação em admin */
-.modo-admin button.horario-disponivel {
-  background-color: #2e7d32;
-  border-color: #388e3c;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.modo-admin button.horario-disponivel:hover {
-  background-color: #43a047;
+.shake {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
 }
 
-.modo-admin button.horario-reservado {
-  background-color: #c62828;
-  border-color: #d32f2f;
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
 }
 
-.modo-admin button.horario-reservado:hover {
-  background-color: #e53935;
-}
-
-.modo-admin input,
-.modo-admin select {
-  background-color: #1e4976;
-  color: #e6f3ff;
-  border: 1px solid #2a5a8f;
-}
-
-.modo-admin .reserva-item {
-  background-color: #1e4976;
-  border: 1px solid #2a5a8f;
-}
-
-.modo-admin .reserva-item:hover {
-  background-color: #2a5a8f;
-}
-
-.modo-admin .modal {
-  background-color: #132f4c;
-  border: 1px solid #1e4976;
-}
-
-/* Botões especiais */
-.admin-primary-btn {
-  background-color: #1e4976;
-  color: #66b2ff;
-  font-weight: 600;
-  border: 1px solid #66b2ff;
-}
-
-.admin-primary-btn:hover {
-  background-color: #2a5a8f;
-}
-
-.admin-action-btn {
-  background-color: #1a5276;
-  color: #a5d8ff;
-  border: 1px solid #66b2ff;
-}
-
-.admin-action-btn:hover {
-  background-color: #21618c;
-}
-
-.admin-danger-btn {
-  background-color: #c62828;
-  color: #ffb3b3;
-  border: 1px solid #ff6b6b;
-}
-
-.admin-danger-btn:hover {
-  background-color: #d32f2f;
-}
-
-.admin-success-btn {
-  background-color: #2e7d32;
-  color: #a5d6a7;
-  border: 1px solid #4caf50;
-}
-
-.admin-success-btn:hover {
-  background-color: #388e3c;
-}
-
-/* Botão flutuante admin */
-#admin-button {
-  background-color: #1e4976;
-  color: #66b2ff;
-  border: 1px solid #66b2ff;
-}
-
-#admin-button:hover {
-  background-color: #2a5a8f;
-}
-
-/* Destaque admin */
-.admin-highlight {
-  box-shadow: 0 0 8px rgba(102, 178, 255, 0.5);
-}
-
-/* Animações gerais */
 .page-transition {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -334,15 +356,56 @@ section {
   transform: translateY(0);
 }
 
-.loading {
-  width: 22px;
-  height: 22px;
-  border: 3px solid rgba(255,255,255,0.3);
-  border-top-color: #fff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.ripple {
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* Melhorias para a área administrativa */
+body.admin-mode button.horario-disponivel {
+  background-color: #006834;
+}
+
+body.admin-mode button.horario-disponivel:hover {
+  background-color: #26cc79;
+}
+
+body.admin-mode .modal h2,
+body.admin-mode h1 {
+  color: #e0e0e0;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.25rem;
+    border-radius: 0;
+    max-width: 100%;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  button, input, select {
+    padding: 0.75rem;
+  }
 }

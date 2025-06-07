@@ -120,13 +120,20 @@ function resetarPagina() {
   }
 }
 
-// Funções de navegação
+// Função de navegação
 function mostrarPagina(pagina) {
   document.getElementById("pagina-inicial").classList.add("hidden");
   document.getElementById("pagina-horarios").classList.add("hidden");
   document.getElementById("pagina-minhas-reservas").classList.add("hidden");
   document.getElementById("pagina-admin").classList.add("hidden");
   document.getElementById("pagina-admin-criar").classList.add("hidden");
+
+  // Adicione esta lógica para controlar o fundo azul
+  if (pagina === "admin" || pagina === "admin-criar") {
+    document.body.classList.add("admin-mode");
+  } else {
+    document.body.classList.remove("admin-mode");
+  }
 
   // Reseta os calendários para a data atual
   const hoje = new Date();
@@ -153,27 +160,6 @@ function mostrarPagina(pagina) {
     document.getElementById("pagina-admin-criar").classList.remove("hidden");
     criarBotoesHorarios();
   }
-
-  // Alternar classe modo-admin no body
-  if (pagina === "admin" || pagina === "admin-criar") {
-    document.body.classList.add("modo-admin");
-    modoAdmin = true;
-    
-    // Atualizar botões na área admin
-    document.querySelectorAll('#pagina-admin button, #pagina-admin-criar button').forEach(btn => {
-      if (btn.textContent.includes('Salvar')) {
-        btn.classList.add('admin-success-btn');
-      } else if (btn.textContent.includes('Excluir') || btn.textContent.includes('Limpar')) {
-        btn.classList.add('admin-danger-btn');
-      } else if (!btn.classList.contains('horario-btn')) {
-        btn.classList.add('admin-primary-btn');
-      }
-    });
-  } else {
-    document.body.classList.remove("modo-admin");
-    modoAdmin = false;
-  }
-
 }
 
 function mostrarLoginAdmin() {
@@ -345,12 +331,12 @@ async function confirmarReserva() {
       });
 
     // Envia mensagem para o WhatsApp
-    const mensagemWhatsApp = `Nova reserva na Vikings!\n\nData: ${formatDisplayDate(
+    const mensagemWhatsApp = `Nova reserva:\n\nData: ${formatDisplayDate(
       selectedDate
     )}\nHorário: ${formatTimeDisplay(
       selectedTime
     )}\nCliente: ${nome}\nTelefone: ${telefone}\nPagamento: ${pagamento}`;
-    const urlWhatsApp = `https://wa.me/5527988866867?text=${encodeURIComponent(
+    const urlWhatsApp = `https://wa.me/5527997563197?text=${encodeURIComponent(
       mensagemWhatsApp
     )}`;
 
@@ -633,7 +619,7 @@ async function preencherSemana() {
 
   mostrarConfirmacao(
     "Preencher Semana",
-    "Deseja criar horários para os próximos 6 dias a partir da data selecionada?",
+    "Deseja preencher a semana? Confira se está na Segunda-Feira.",
     async () => {
       try {
         const dataAtual = new Date(selectedDate);
