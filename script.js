@@ -153,6 +153,27 @@ function mostrarPagina(pagina) {
     document.getElementById("pagina-admin-criar").classList.remove("hidden");
     criarBotoesHorarios();
   }
+
+  // Alternar classe modo-admin no body
+  if (pagina === "admin" || pagina === "admin-criar") {
+    document.body.classList.add("modo-admin");
+    modoAdmin = true;
+    
+    // Atualizar botões na área admin
+    document.querySelectorAll('#pagina-admin button, #pagina-admin-criar button').forEach(btn => {
+      if (btn.textContent.includes('Salvar')) {
+        btn.classList.add('admin-success-btn');
+      } else if (btn.textContent.includes('Excluir') || btn.textContent.includes('Limpar')) {
+        btn.classList.add('admin-danger-btn');
+      } else if (!btn.classList.contains('horario-btn')) {
+        btn.classList.add('admin-primary-btn');
+      }
+    });
+  } else {
+    document.body.classList.remove("modo-admin");
+    modoAdmin = false;
+  }
+
 }
 
 function mostrarLoginAdmin() {
@@ -324,12 +345,12 @@ async function confirmarReserva() {
       });
 
     // Envia mensagem para o WhatsApp
-    const mensagemWhatsApp = `Nova reserva:\n\nData: ${formatDisplayDate(
+    const mensagemWhatsApp = `Nova reserva na Vikings!\n\nData: ${formatDisplayDate(
       selectedDate
     )}\nHorário: ${formatTimeDisplay(
       selectedTime
     )}\nCliente: ${nome}\nTelefone: ${telefone}\nPagamento: ${pagamento}`;
-    const urlWhatsApp = `https://wa.me/5527997563197?text=${encodeURIComponent(
+    const urlWhatsApp = `https://wa.me/5527988866867?text=${encodeURIComponent(
       mensagemWhatsApp
     )}`;
 
@@ -642,7 +663,7 @@ async function preencherSemana() {
         }
 
         // Preenche os próximos 6 dias
-        for (let i = 1; i <= 6; i++) {
+        for (let i = 1; i <= 5; i++) {
           const novaData = addDays(dataAtual, i);
           const dataStr = formatFirestoreDate(novaData);
 

@@ -1,140 +1,178 @@
-* { 
-  box-sizing: border-box; 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: #121212;
-  color: #ffffff;
+  color: #f5f5f5;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  line-height: 1.5;
 }
+
 .container {
   width: 100%;
-  max-width: 400px;
-  padding: 1.5rem;
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  max-width: 420px;
+  padding: 2rem 1.25rem;
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
-h1 {
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
+
+/* Textos */
+h1, h2 {
+  font-weight: 600;
+  margin-bottom: 1.25rem;
   color: #ffffff;
+  font-size: 1.5rem;
+  text-align: center;
 }
+
+/* Botões padrão */
 button {
   width: 100%;
-  padding: 0.75rem;
-  margin: 0.5rem 0;
+  padding: 0.85rem;
+  margin: 0.4rem 0;
   font-size: 1rem;
   border: none;
-  border-radius: 6px;
-  background-color: #323232;
-  color: #ffffff;
+  border-radius: 12px;
+  background-color: #2a2a2a;
+  color: #fff;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
-button:hover { 
-  background-color: #444444; 
+
+button:hover {
+  background-color: #3b3b3b;
 }
+
+button:active {
+  transform: scale(0.97);
+}
+
 button.disabled {
-  background-color: #555555;
+  background-color: #555;
   cursor: not-allowed;
 }
+
+/* Botões especiais */
 button.horario-disponivel {
-  background-color: #1b5e20;
-}
-button.horario-disponivel:hover {
   background-color: #2e7d32;
 }
+
+button.horario-disponivel:hover {
+  background-color: #388e3c;
+}
+
 button.horario-reservado {
   background-color: #c62828;
-  color: #ffffff;
 }
+
+button.horario-reservado:hover {
+  background-color: #d32f2f;
+}
+
+/* Inputs */
 input, select {
   width: 100%;
   padding: 0.75rem;
-  margin-bottom: 0.75rem;
-  border-radius: 6px;
-  border: 1px solid #444444;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: none;
+  background-color: #2a2a2a;
+  color: #fff;
   font-size: 1rem;
-  background-color: #2c2c2c;
-  color: #ffffff;
+  transition: border 0.2s ease, background-color 0.2s ease;
 }
+
+input:focus, select:focus {
+  outline: none;
+  border: 1px solid #4caf50;
+  background-color: #333;
+}
+
+/* Modal */
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 350px;
+  width: 92%;
+  max-width: 360px;
   background-color: #1e1e1e;
-  padding: 1.25rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
   z-index: 100;
 }
-.hidden { 
-  display: none; 
+
+.hidden {
+  display: none;
 }
+
 #admin-button {
   position: absolute;
-  bottom: 0.75rem;
-  right: 0.75rem;
-  width: 40px;
-  height: 40px;
-  background: #323232;
-  color: #ffffff;
+  bottom: 1rem;
+  right: 1rem;
+  width: 48px;
+  height: 48px;
+  background-color: #2a2a2a;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-size: 1.1rem;
 }
+
 section {
   padding: 0.5rem;
 }
-.horario-btn {
-  margin: 0.25rem;
-  width: calc(50% - 0.5rem);
-  display: inline-block;
-}
-.reserva-item {
-  background-color: #2c2c2c;
-  padding: 0.75rem;
-  margin: 0.5rem 0;
-  border-radius: 6px;
-  cursor: pointer;
-}
+
 .calendar {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
+
 .horarios-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 0.5rem;
+  justify-content: center;
 }
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 99;
+
+.horario-btn {
+  flex: 1 1 45%;
+  padding: 0.6rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
 }
-.info-reserva {
-  margin-bottom: 1rem;
-}
-.info-reserva p {
+
+.reserva-item {
+  background-color: #252525;
+  padding: 1rem;
   margin: 0.5rem 0;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
 }
+
+.reserva-item:hover {
+  background-color: #333;
+}
+
+.info-reserva p {
+  margin: 0.4rem 0;
+}
+
 .mensagem-flutuante {
   position: fixed;
   top: 20px;
@@ -142,84 +180,169 @@ section {
   transform: translateX(-50%);
   background-color: #1b5e20;
   color: white;
-  padding: 12px 24px;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
   z-index: 1000;
   animation: fadeInOut 3s ease-in-out;
 }
+
 @keyframes fadeInOut {
-  0% { opacity: 0; top: 0; }
-  10% { opacity: 1; top: 20px; }
-  90% { opacity: 1; top: 20px; }
-  100% { opacity: 0; top: 0; }
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
 }
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+
+/* ===== ADMIN MODE CORRIGIDO ===== */
+.modo-admin {
+  background-color: #0a1929;
 }
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+
+.modo-admin .container {
+  background-color: #132f4c;
+  border: 1px solid #1e4976;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
 }
-.fade-in {
-  animation: fadeIn 0.3s ease-out forwards;
+
+.modo-admin h1, 
+.modo-admin h2 {
+  color: #66b2ff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
-.pulse:hover {
-  animation: pulse 1.5s infinite;
+
+.modo-admin button {
+  background-color: #1e4976;
+  color: #e6f3ff;
+  border: 1px solid #2a5a8f;
 }
-.bounce-on-click:active {
-  animation: bounce 0.3s;
+
+.modo-admin button:hover {
+  background-color: #2a5a8f;
 }
-.loading {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid rgba(255,255,255,.3);
-  border-radius: 50%;
-  border-top-color: #fff;
-  animation: spin 1s ease-in-out infinite;
+
+/* Corrigido: Mantém cores de ação em admin */
+.modo-admin button.horario-disponivel {
+  background-color: #2e7d32;
+  border-color: #388e3c;
 }
-@keyframes spin {
-  to { transform: rotate(360deg); }
+
+.modo-admin button.horario-disponivel:hover {
+  background-color: #43a047;
 }
-.shake {
-  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+
+.modo-admin button.horario-reservado {
+  background-color: #c62828;
+  border-color: #d32f2f;
 }
-@keyframes shake {
-  10%, 90% { transform: translateX(-1px); }
-  20%, 80% { transform: translateX(2px); }
-  30%, 50%, 70% { transform: translateX(-4px); }
-  40%, 60% { transform: translateX(4px); }
+
+.modo-admin button.horario-reservado:hover {
+  background-color: #e53935;
 }
+
+.modo-admin input,
+.modo-admin select {
+  background-color: #1e4976;
+  color: #e6f3ff;
+  border: 1px solid #2a5a8f;
+}
+
+.modo-admin .reserva-item {
+  background-color: #1e4976;
+  border: 1px solid #2a5a8f;
+}
+
+.modo-admin .reserva-item:hover {
+  background-color: #2a5a8f;
+}
+
+.modo-admin .modal {
+  background-color: #132f4c;
+  border: 1px solid #1e4976;
+}
+
+/* Botões especiais */
+.admin-primary-btn {
+  background-color: #1e4976;
+  color: #66b2ff;
+  font-weight: 600;
+  border: 1px solid #66b2ff;
+}
+
+.admin-primary-btn:hover {
+  background-color: #2a5a8f;
+}
+
+.admin-action-btn {
+  background-color: #1a5276;
+  color: #a5d8ff;
+  border: 1px solid #66b2ff;
+}
+
+.admin-action-btn:hover {
+  background-color: #21618c;
+}
+
+.admin-danger-btn {
+  background-color: #c62828;
+  color: #ffb3b3;
+  border: 1px solid #ff6b6b;
+}
+
+.admin-danger-btn:hover {
+  background-color: #d32f2f;
+}
+
+.admin-success-btn {
+  background-color: #2e7d32;
+  color: #a5d6a7;
+  border: 1px solid #4caf50;
+}
+
+.admin-success-btn:hover {
+  background-color: #388e3c;
+}
+
+/* Botão flutuante admin */
+#admin-button {
+  background-color: #1e4976;
+  color: #66b2ff;
+  border: 1px solid #66b2ff;
+}
+
+#admin-button:hover {
+  background-color: #2a5a8f;
+}
+
+/* Destaque admin */
+.admin-highlight {
+  box-shadow: 0 0 8px rgba(102, 178, 255, 0.5);
+}
+
+/* Animações gerais */
 .page-transition {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
 .page-hidden {
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
 }
+
 .page-visible {
   opacity: 1;
   transform: translateY(0);
 }
-.ripple {
-  position: relative;
-  overflow: hidden;
-}
-.ripple-effect {
-  position: absolute;
+
+.loading {
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.4);
-  transform: scale(0);
-  animation: ripple 0.6s linear;
-  pointer-events: none;
+  animation: spin 1s linear infinite;
 }
-@keyframes ripple {
-  to {
-    transform: scale(2.5);
-    opacity: 0;
-  }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }

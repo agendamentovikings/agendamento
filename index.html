@@ -77,15 +77,15 @@
         <input type="text" id="calendario-input" placeholder="Selecione uma data">
       </div>
       <div id="horarios" class="horarios-container"></div>
-      <button onclick="mostrarPagina('inicial')">Voltar</button>
+      <button onclick="mostrarPagina('inicial')">Sair</button>
     </section>
 
     <!-- Página: Minhas Reservas -->
     <section id="pagina-minhas-reservas" class="hidden">
       <h1>Minhas Reservas</h1>
       <div id="lista-reservas"></div>
-      <button onclick="mostrarPagina('inicial')">Voltar</button>
-    </section>
+            <button onclick="mostrarPagina('inicial')">Sair</button>
+
 
     <!-- Página: Admin Visualização -->
     <section id="pagina-admin" class="hidden">
@@ -106,12 +106,12 @@
       </div>
       <div id="botoes-horarios" class="horarios-container"></div>
       <div style="display: flex; gap: 0.5rem;">
-        <button onclick="marcarTodosHorarios()" style="flex: 1;">Marcar Tudo</button>
-        <button onclick="preencherSemana()" style="flex: 1;">Preencher Semana</button>
+<button onclick="marcarTodosHorarios()" class="admin-action-btn">Marcar Tudo</button>
+<button onclick="preencherSemana()" class="admin-action-btn">Preencher Semana</button>
       </div>
-      <button onclick="salvarHorarios()" class="horario-disponivel">Salvar Horários</button>
-      <button onclick="limparDia()" style="background-color: #d32f2f;">Limpar Todos Horários</button>
-      <button onclick="mostrarPagina('admin')">Voltar</button>
+      <button onclick="salvarHorarios()" class="admin-success-btn">Salvar Horários</button>
+<button onclick="limparDia()" class="admin-danger-btn">Limpar Todos Horários</button>
+<button onclick="mostrarPagina('admin')" class="admin-primary-btn">Voltar</button>
     </section>
   </div>
 
