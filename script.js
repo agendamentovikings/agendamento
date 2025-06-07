@@ -163,6 +163,10 @@ function mostrarPagina(pagina) {
 }
 
 function mostrarLoginAdmin() {
+  // Limpa os campos de usuário e senha
+  document.getElementById("admin-user").value = "";
+  document.getElementById("admin-pass").value = "";
+
   document.getElementById("admin-login").classList.remove("hidden");
   document.body.insertAdjacentHTML("beforeend", '<div class="overlay"></div>');
 }
