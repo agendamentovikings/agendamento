@@ -335,14 +335,15 @@ async function confirmarReserva() {
       });
 
     // Envia mensagem para o WhatsApp
-    const mensagemWhatsApp = `Nova reserva:\n\nData: ${formatDisplayDate(
-      selectedDate
-    )}\nHorário: ${formatTimeDisplay(
-      selectedTime
-    )}\nCliente: ${nome}\nTelefone: ${telefone}\nPagamento: ${pagamento}`;
-    const urlWhatsApp = `https://wa.me/5527988866867?text=${encodeURIComponent(
-      mensagemWhatsApp
-    )}`;
+const mensagemWhatsApp = `Nova reserva na Vikings!:\n\nData: ${formatDisplayDate( 
+  selectedDate
+)}\nHorário: ${formatTimeDisplay(
+  selectedTime
+)}\nCliente: ${nome}\nTelefone: ${telefone}\nPagamento: ${pagamento}\n\n*Agradecemos a preferência!*\n*Vikings Barbearia*`;
+
+const urlWhatsApp = `https://wa.me/5527988866867?text=${encodeURIComponent(
+  mensagemWhatsApp
+)}`;
 
     // Abre o WhatsApp em uma nova aba
     window.open(urlWhatsApp, "_blank");
